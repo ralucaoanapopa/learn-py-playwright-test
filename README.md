@@ -4,25 +4,25 @@
 - If it is already installed, check in terminal:
 
 ```
-> python --version
+python --version
 ```
 
 2. Make sure to have the [latest pip version](https://pip.pypa.io/en/stable/installation/) installed
 
 ```
-> python.exe -m pip install --upgrade pip
+python.exe -m pip install --upgrade pip
 ```
 
 3. Install the [pytest playwright plugin](https://pypi.org/project/pytest-playwright/)
 
 ```
-> pip install pytest-playwright
+pip install pytest-playwright
 ```
 
 4. Install the required browsers (chromium, firefox, webkit)
 
 ```
-> playwright install
+playwright install
 ```
 
 # [Run tests](https://playwright.dev/python/docs/running-tests)
@@ -30,19 +30,19 @@
 By default tests will be run on chromium, in headless mode:
 
 ```
-> pytest
+pytest
 ```
 
 Using pytest [CLI options](https://playwright.dev/python/docs/test-runners#cli-arguments) can choose another browser and headed mode:
 
 ```
-> pytest --browser webkit --headed
+pytest --browser webkit --headed
 ```
 
 Run only one test suite
 
 ```
-> pytest <test_file>.py --headed
+pytest <test_file>.py --headed
 ```
 
 # Results
