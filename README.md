@@ -25,7 +25,7 @@
 > playwright install
 ```
 
-# Run tests
+# [Run tests](https://playwright.dev/python/docs/running-tests)
 
 By default tests will be run on chromium, in headless mode:
 
@@ -37,6 +37,12 @@ Using pytest [CLI options](https://playwright.dev/python/docs/test-runners#cli-a
 
 ```
 > pytest --browser webkit --headed
+```
+
+Run only one test suite
+
+```
+> pytest <test_file>.py --headed
 ```
 
 # Results
