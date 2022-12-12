@@ -27,6 +27,15 @@ playwright install
 
 # [Run tests](https://playwright.dev/python/docs/running-tests)
 
+### Pre-requisites
+
+Credentials used in tests need to be set as [environment variables](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/set_1).
+
+In order to see the list of tests:
+```
+pytest --collect-only
+```
+
 By default tests will be run on chromium, in headless mode:
 
 ```
