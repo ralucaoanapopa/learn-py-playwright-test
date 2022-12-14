@@ -37,6 +37,7 @@ def test_login_with_valid_credentials(before_all_after_all):
     expect(page).to_have_title(page_title)
     expect(page).to_have_url(profile_URL)
     page.click("text=Log out")
+    expect(page).to_have_url(login_URL)
 
 def test_login_generated_with_codegen(before_all_after_all) -> None:
     page = before_all_after_all
@@ -48,3 +49,4 @@ def test_login_generated_with_codegen(before_all_after_all) -> None:
     expect(page).to_have_title(page_title)
     expect(page).to_have_url(profile_URL)
     page.click("text=Log out")
+    expect(page).to_have_url(login_URL)
