@@ -16,7 +16,7 @@ user_pass = os.environ.get('PASSWORD_QA')
 
 @pytest.fixture(scope="session", autouse=True)
 def before_all_after_all(playwright):
-    # Go to the starting url before each test
+    # Go to the starting url before all tests
     chromium = playwright.chromium
     browser = chromium.launch(headless=False, slow_mo=2000)
     context = browser.new_context()
