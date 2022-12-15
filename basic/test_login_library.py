@@ -11,8 +11,10 @@ user_name = os.environ.get('USERNAME_QA')
 user_pass = os.environ.get('PASSWORD_QA')
 
 def test_run(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=False, slow_mo=2000)
-    context = browser.new_context()
+    browser = playwright.chromium.launch(headless=False, slow_mo=400)
+    context = browser.new_context(
+        record_video_dir="../videos/"
+    )
     page = context.new_page()
 
     page.goto(login_URL)
@@ -27,6 +29,5 @@ def test_run(playwright: Playwright) -> None:
     page.get_by_role("button", name="Log out").click()
     expect(page).to_have_url(login_URL)
 
-    # ---------------------
     context.close()
     browser.close()
