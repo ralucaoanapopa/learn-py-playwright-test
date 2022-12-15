@@ -1,5 +1,5 @@
 import pytest, os
-from playwright.sync_api import Page, expect
+from playwright.sync_api import expect
 
 base_URL = 'https://demoqa.com/'
 login_URL = base_URL+'login'
@@ -9,7 +9,8 @@ page_title = "ToolsQA"
 
 username_id = '#userName'
 passwd_id = '#password'
-loginBtn_id = '#login'
+login_btn_id = '#login'
+username_value_id = '#userName-value'
 
 user_name = os.environ.get('USERNAME_QA')
 user_pass = os.environ.get('PASSWORD_QA')
@@ -23,19 +24,24 @@ def before_all_after_all(playwright):
 
     page = context.new_page()
     page.goto(login_URL)
+
+    expect(page).to_have_url(login_URL)
+    expect(page).to_have_title(page_title)
+
     yield page
     page.close()
 
 def test_login_with_valid_credentials(before_all_after_all):
     page = before_all_after_all
-    expect(page).to_have_url(login_URL)
-    expect(page).to_have_title(page_title)
+    
     page.fill(username_id, user_name)
     page.fill(passwd_id, user_pass)
-    page.click(loginBtn_id)
+    page.click(login_btn_id)
 
     expect(page).to_have_title(page_title)
     expect(page).to_have_url(profile_URL)
+    expect(page.locator(username_value_id)).to_have_text(user_name)
+
     page.click("text=Log out")
     expect(page).to_have_url(login_URL)
 
