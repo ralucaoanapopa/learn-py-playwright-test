@@ -67,6 +67,7 @@ pytest <test_file>.py --headed
 
 ## Free websites for UI testing
 - [DemoQA](https://demoqa.com/)
+- [Letcode](https://letcode.in/)
 - [Sauce Demo](https://www.saucedemo.com/)
 - [UI elements on herokuapp](https://the-internet.herokuapp.com/)
 - [Test pages for automating](https://testpages.herokuapp.com/styled/index.html)
