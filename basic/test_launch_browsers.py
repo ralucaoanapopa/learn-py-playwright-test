@@ -11,17 +11,25 @@ def test_chromium(playwright):
     expect(page).to_have_title(page_title)
     browser.close()
 
+def test_chromium_msedge_channel(playwright):
+    chromium = playwright.chromium
+    browser = chromium.launch(headless=False, channel="msedge", slow_mo=300)
+    page = browser.new_page()
+    page.goto(base_URL)
+    expect(page).to_have_title(page_title)
+    browser.close()
+
 def test_firefox(playwright):
-    chromium = playwright.firefox
-    browser = chromium.launch(headless=False, slow_mo=300)
+    firefox = playwright.firefox
+    browser = firefox.launch(headless=False, slow_mo=300)
     page = browser.new_page()
     page.goto(base_URL)
     expect(page).to_have_title(page_title)
     browser.close()
 
 def test_webkit(playwright):
-    chromium = playwright.webkit
-    browser = chromium.launch(headless=False, slow_mo=300)
+    webkit = playwright.webkit
+    browser = webkit.launch(headless=False, slow_mo=300)
     page = browser.new_page()
     page.goto(base_URL)
     expect(page).to_have_title(page_title)
