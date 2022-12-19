@@ -54,8 +54,15 @@ Run only one test suite
 pytest <test_file>.py --headed
 ```
 
+Run all tests from root
+```
+python -m pytest
+```
+
 # Results
 
+## All tests
+![All tests](/results/all_tests_pytest_playwright.PNG "All tests")
 
 # Resources
 

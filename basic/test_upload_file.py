@@ -6,8 +6,8 @@ page_title_demoqa = "ToolsQA"
 upload_herokuapp = 'https://the-internet.herokuapp.com/upload'
 page_title_heroku = 'The Internet'
 
-file_path_a = '../videos/afile.webm'
-file_path_b = '../videos/bfile.webm'
+file_path_a = 'videos/afile.webm'
+file_path_b = 'videos/bfile.webm'
 
 upload_id = '#uploadFile'
 input_type_file = "input[type='file']"
