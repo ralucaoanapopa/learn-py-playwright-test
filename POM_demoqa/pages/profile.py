@@ -1,15 +1,19 @@
 from playwright.sync_api import Page
 
-class ProfilePage:
-    base_URL = "https://demoqa.com/"
-    profile_URL = base_URL + "profile"
+from pages.base import BasePage
 
-    def __init__(self, page: Page) -> None:
+class ProfilePage(BasePage):
+
+    logout_btn_text = "text=Log out"
+    username_value_id = "#userName-value"
+
+    def __init__(self, page: Page):
+        super().__init__()
         self.page = page
-        self.logout_btn = page.locator("text=Log out")
-        self.username_value = page.locator('#userName-value')
+        self.logout_btn = page.locator(self.logout_btn_text)
+        self.username_value = page.locator(self.username_value_id)
 
-    def load(self) -> None:
+    def load(self):
         self.page.goto(self.profile_URL)
     
     def get_username_value(self):

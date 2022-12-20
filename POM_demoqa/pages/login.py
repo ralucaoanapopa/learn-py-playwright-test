@@ -1,17 +1,22 @@
 from playwright.sync_api import Page
 
-class LoginPage:
-    base_URL = "https://demoqa.com/"
-    login_URL = base_URL + "login"
+from pages.base import BasePage
+
+class LoginPage(BasePage):
+
+    username_input_id = "input[id='userName']"
+    password_input_id = "input[id='password']"
+    login_btn_id = "button[id='login']"
     title = "ToolsQA"
 
-    def __init__(self, page: Page) -> None:
+    def __init__(self, page: Page):
+        super().__init__()
         self.page = page
-        self.username_input = page.locator("input[id='userName']")
-        self.password_input = page.locator("input[id='password']")
-        self.login_btn = page.locator("button[id='login']")
+        self.username_input = page.locator(self.username_input_id)
+        self.password_input = page.locator(self.password_input_id)
+        self.login_btn = page.locator(self.login_btn_id)
 
-    def load(self) -> None:
+    def load(self):
         self.page.goto(self.login_URL)
 
     def login_form(self, username, password):

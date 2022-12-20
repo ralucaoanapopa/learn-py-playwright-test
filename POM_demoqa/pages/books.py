@@ -1,9 +1,8 @@
 from playwright.sync_api import Page
 
-class BooksPage:
-    base_URL = "https://demoqa.com/"
-    books_URL = base_URL + "books"
-    login_URL = base_URL + "login"
+from pages.base import BasePage
+
+class BooksPage(BasePage):
 
     book_header_xpath = "xpath=//div[@class='main-header']"
     login_btn = "button[id='login']"
@@ -17,10 +16,11 @@ class BooksPage:
     no_rows_class = ".rt-noData"
     username_value_id = '#userName-value'
 
-    def __init__(self, page: Page) -> None:
+    def __init__(self, page: Page):
+        super().__init__()
         self.page = page
 
-    def load(self) -> None:
+    def load(self):
         self.page.goto(self.books_URL)
 
     def get_book_header(self):

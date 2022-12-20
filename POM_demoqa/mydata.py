@@ -17,3 +17,4 @@ book_titles = [
 keyword_match_title = "Java"
 keyword_no_match = "ZZZZZ"
 no_rows_text = "No rows found"
+base_URL_DemoQA = "https://demoqa.com/"
