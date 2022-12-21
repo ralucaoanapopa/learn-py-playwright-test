@@ -17,10 +17,10 @@ class InventoryPage(BasePage):
     onesie_remove_id = "#remove-sauce-labs-onesie"
     bolt_Tshirt_id = "#add-to-cart-sauce-labs-bolt-t-shirt"
     bolt_Tshirt_remove_id = "#remove-sauce-labs-bolt-t-shirt"
-    #backpack_Id = "#add-to-cart-sauce-labs-backpack"
-    #backpack_remove_id = "#remove-sauce-labs-backpack"
-    #fleece_Jacket_id = "#add-to-cart-sauce-labs-fleece-jacket"
-    #fleece_Jacket_remove_id = "#remove-sauce-labs-fleece-jacket"
+    backpack_Id = "#add-to-cart-sauce-labs-backpack"
+    backpack_remove_id = "#remove-sauce-labs-backpack"
+    fleece_Jacket_id = "#add-to-cart-sauce-labs-fleece-jacket"
+    fleece_Jacket_remove_id = "#remove-sauce-labs-fleece-jacket"
     shopping_cart_badge_class = ".shopping_cart_badge"
 
     def __init__(self, page: Page):
@@ -88,3 +88,6 @@ class InventoryPage(BasePage):
     
     def get_shopping_cart_badge(self):
         return self.page.locator(self.shopping_cart_badge_class)
+
+    def click_shopping_cart(self):
+        self.page.locator(self.shopping_cart_class).click()
