@@ -1,6 +1,7 @@
 from playwright.sync_api import Page
 
-from pages.base import BasePage
+from POM_demoqa.pages.base import BasePage
+
 
 class ProfilePage(BasePage):
 
@@ -15,7 +16,7 @@ class ProfilePage(BasePage):
 
     def load(self):
         self.page.goto(self.profile_URL)
-    
+
     def get_username_value(self):
         return self.username_value.text_content()
 

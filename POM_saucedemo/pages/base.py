@@ -1,4 +1,5 @@
-from mydata import *
+from POM_saucedemo.mydata import base_URL_Sauce
+
 
 class BasePage(object):
     def __init__(self):

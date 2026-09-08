@@ -16,6 +16,7 @@ dropdown_xpath = "xpath=//select[@name='dropdown']"
 option_5_value = 'dd5'
 dropdown_options = "xpath=//select[@name='dropdown']/option"
 
+
 @pytest.fixture(scope="session", autouse=True)
 def before_all_after_all(playwright):
     # Go to the starting url before all tests
@@ -28,6 +29,7 @@ def before_all_after_all(playwright):
     yield page
     page.close()
 
+
 def test_handle_dropdown_herokuapp(before_all_after_all):
     page = before_all_after_all
 
@@ -36,22 +38,25 @@ def test_handle_dropdown_herokuapp(before_all_after_all):
 
     dropdown_elem = page.locator(dropdown_id)
     # select option based on value
-    dropdown_elem.select_option(value = option_2_value)
+    dropdown_elem.select_option(value=option_2_value)
     # label
-    dropdown_elem.select_option(label = option_1_label)
+    dropdown_elem.select_option(label=option_1_label)
     # index
-    dropdown_elem.select_option(index = 2)
+    dropdown_elem.select_option(index=2)
+
 
 def test_select_multiple_values_from_test_pages(before_all_after_all):
     page = before_all_after_all
 
     page.goto(testpages_basic_form_URL)
 
-    multiple_select_elem =  page.locator(multiple_select_xpath)
+    multiple_select_elem = page.locator(multiple_select_xpath)
 
-    multiple_select_elem.select_option(value = [option_1_value, option_3_value])
+    multiple_select_elem.select_option(value=[option_1_value, option_3_value])
 
-def test_count_all_options_from_a_dropdown_using_element_handle(before_all_after_all):
+
+def test_count_all_options_from_a_dropdown_using_element_handle(
+        before_all_after_all):
     page = before_all_after_all
 
     page.goto(testpages_basic_form_URL)
@@ -60,7 +65,8 @@ def test_count_all_options_from_a_dropdown_using_element_handle(before_all_after
     dropdown = page.query_selector(dropdown_xpath)
     available_options = dropdown.query_selector_all('option')
     assert len(available_options) == 6
-    
+
+
 def test_count_all_options_from_a_dropdown_using_locator(before_all_after_all):
     page = before_all_after_all
 
@@ -68,12 +74,13 @@ def test_count_all_options_from_a_dropdown_using_locator(before_all_after_all):
 
     expect(page.locator(dropdown_options)).to_have_count(6)
 
+
 def test_get_value_of_the_selected_option_via_index(before_all_after_all):
     page = before_all_after_all
 
     page.goto(testpages_basic_form_URL)
 
-    page.select_option(dropdown_xpath, index = 4)
+    page.select_option(dropdown_xpath, index=4)
 
-    text_option =  page.eval_on_selector(dropdown_xpath, "elem => elem.value")
+    text_option = page.eval_on_selector(dropdown_xpath, "elem => elem.value")
     assert text_option == option_5_value

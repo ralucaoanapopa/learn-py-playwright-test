@@ -21,6 +21,7 @@ btn_home_id = '#home'
 btn_multiple_id = '#multi'
 btn_simple_alert_id = '#accept'
 
+
 @pytest.fixture(scope="session", autouse=True)
 def before_all_after_all(playwright):
     # create context for all tests
@@ -30,6 +31,7 @@ def before_all_after_all(playwright):
 
     yield context
     context.close()
+
 
 def test_single_page_handling_on_demoqa(before_all_after_all):
     context = before_all_after_all
@@ -41,7 +43,7 @@ def test_single_page_handling_on_demoqa(before_all_after_all):
 
     # get page after a specific action (eg: click a button)
     with context.expect_page() as new_page_info:
-        page.locator(btn_newTab_id).click() # opens a new tab
+        page.locator(btn_newTab_id).click()
     new_page = new_page_info.value
 
     new_page.wait_for_load_state()
@@ -51,6 +53,7 @@ def test_single_page_handling_on_demoqa(before_all_after_all):
     new_page.close()
     page.close()
 
+
 def test_single_page_handling_on_letcode(before_all_after_all):
     context = before_all_after_all
 
@@ -59,7 +62,7 @@ def test_single_page_handling_on_letcode(before_all_after_all):
     expect(page).to_have_url(windows_letcode_URL)
 
     with context.expect_page() as new_page_info:
-        page.locator(btn_home_id).click() # opens a new tab
+        page.locator(btn_home_id).click()
     new_page = new_page_info.value
 
     new_page.wait_for_load_state()
@@ -74,6 +77,7 @@ def test_single_page_handling_on_letcode(before_all_after_all):
     expect(page).to_have_url(product_letcode_URL)
     new_page.close()
     page.close()
+
 
 def test_multiple_pages_handling_on_letcode(before_all_after_all):
     context = before_all_after_all

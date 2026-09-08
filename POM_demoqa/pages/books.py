@@ -1,6 +1,7 @@
 from playwright.sync_api import Page
 
-from pages.base import BasePage
+from POM_demoqa.pages.base import BasePage
+
 
 class BooksPage(BasePage):
 
@@ -40,7 +41,7 @@ class BooksPage(BasePage):
 
     def get_table_body(self):
         return self.page.locator(self.table_body_class)
-    
+
     def get_table_rows(self):
         return self.page.locator(self.table_body_rows_class)
 

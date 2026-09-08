@@ -18,9 +18,10 @@ frames_demoqa_URL = 'https://demoqa.com/frames'
 page_title = "ToolsQA"
 frame_content = "This is a sample page"
 
+
 @pytest.fixture(scope="session", autouse=True)
 def before_all_after_all(playwright):
-    
+
     chromium = playwright.chromium
     browser = chromium.launch(headless=False, slow_mo=500)
     context = browser.new_context()
@@ -30,21 +31,23 @@ def before_all_after_all(playwright):
     yield page
     page.close()
 
+
 def test_interact_with_nested_frames_on_letcode(before_all_after_all):
     page = before_all_after_all
 
     page.goto(frames_letcode_URL)
     assert page.title() is not None
 
-    frame = page.frame( name = first_frame_name )
+    frame = page.frame(name=first_frame_name)
 
     if frame is not None:
         frame.fill(firstName_name, firstName_data)
         frame.fill(lastName_name, lastName_data)
 
-        expect(frame.locator(output_xpath)).to_contain_text(firstName_data + ' ' + lastName_data)
+        expect(frame.locator(output_xpath)).to_contain_text(
+            firstName_data + ' ' + lastName_data)
 
-        frames =  frame.child_frames
+        frames = frame.child_frames
         assert len(frames) is 2
 
         frames[1].fill(email_name, email_data)
@@ -53,7 +56,8 @@ def test_interact_with_nested_frames_on_letcode(before_all_after_all):
         parentFrame.fill(lastName_name, lastName_data_parent)
         expect(frame.locator(output_xpath)).to_contain_text(firstName_data + ' ' + lastName_data_parent)
     else:
-        raise("No such frame")
+        raise ("No such frame")
+
 
 def test_interact_with_frames_on_demoqa(before_all_after_all):
     page = before_all_after_all
@@ -62,6 +66,6 @@ def test_interact_with_frames_on_demoqa(before_all_after_all):
     assert page.title() is not None
     expect(page).to_have_title(page_title)
 
-    frame_one = page.frame(url = "sample")
+    frame_one = page.frame(url="sample")
     if frame_one is not None:
         expect(frame_one.locator('h1')).to_have_text(frame_content)

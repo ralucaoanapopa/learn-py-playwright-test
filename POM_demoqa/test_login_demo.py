@@ -1,11 +1,16 @@
 from playwright.sync_api import expect
-from pages.profile import ProfilePage
-from pages.login import LoginPage
-from mydata import *
-import pytest, os
+from POM_demoqa.pages.profile import ProfilePage
+from POM_demoqa.pages.login import LoginPage
+from POM_demoqa.mydata import (
+    invalid,
+    error_msg_login,
+)
+import pytest
+import os
 
 user_name = os.environ.get('USERNAME_QA')
 user_pass = os.environ.get('PASSWORD_QA')
+
 
 @pytest.fixture(scope="session", autouse=True)
 def before_all_after_all(playwright):
@@ -18,6 +23,7 @@ def before_all_after_all(playwright):
 
     yield page
     page.close()
+
 
 def test_login_with_valid_credentials(before_all_after_all):
     page = before_all_after_all
@@ -35,6 +41,7 @@ def test_login_with_valid_credentials(before_all_after_all):
     profile_page.logout()
     expect(page).to_have_url(login_page.login_URL)
 
+
 def test_login_with_invalid_password(before_all_after_all):
     page = before_all_after_all
 
@@ -45,6 +52,7 @@ def test_login_with_invalid_password(before_all_after_all):
 
     assert login_page.get_error_login_msg() == error_msg_login
 
+
 def test_login_with_invalid_username(before_all_after_all):
     page = before_all_after_all
 
@@ -54,4 +62,3 @@ def test_login_with_invalid_username(before_all_after_all):
     login_page.login_form(invalid, user_pass)
 
     assert login_page.get_error_login_msg() == error_msg_login
-

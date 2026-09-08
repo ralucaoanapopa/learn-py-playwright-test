@@ -13,13 +13,21 @@ python --version
 python.exe -m pip install --upgrade pip
 ```
 
-3. Install the [pytest playwright plugin](https://pypi.org/project/pytest-playwright/)
+3. Create a virtual environment (use gitbash terminal)
 
 ```
-pip install pytest-playwright
+python.exe -m venv .venv
+source .venv/Scripts/activate
 ```
 
-4. Install the required browsers (chromium, firefox, webkit)
+4. Install all dependencies
+- the [pytest playwright plugin](https://pypi.org/project/pytest-playwright/)
+
+```
+pip install -r requirements.txt
+```
+
+5. Install the required browsers (chromium, firefox, webkit)
 
 ```
 playwright install
@@ -30,6 +38,19 @@ playwright install
 ### Pre-requisites
 
 Credentials used in tests need to be set as [environment variables](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/set_1).
+
+Easy setup for secrets using shell file which can be executed in git bash in order to set environment variables.
+Create a `credentials.sh` with:
+```
+export USERNAME_QA=<add_username>
+export PASSWORD_QA=<add_pwd>
+export USER_SAUCE=<add_user>
+export PASSWORD_SAUCE=<add_pwd>
+```
+Execute in git bash
+```
+source ./credentials.sh
+```
 
 In order to see the list of tests:
 ```
@@ -59,10 +80,16 @@ Run all tests from root
 python -m pytest
 ```
 
+Run tests for one website
+```
+pytest POM_saucedemo/* --headed
+```
+
 # Results
 
 ## All tests
 ![All tests](/results/all_tests_pytest_playwright.PNG "All tests")
+![Part of tests](/results/part_of_tests_ran.PNG "Part of tests")
 
 # Resources
 

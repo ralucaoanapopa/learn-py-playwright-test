@@ -1,7 +1,7 @@
 from playwright.sync_api import expect
-from pages.login_sauce import LoginSaucePage
-from pages.inventory import InventoryPage
-from mydata import *
+from POM_saucedemo.pages.login import LoginPage
+from POM_saucedemo.pages.inventory import InventoryPage
+from POM_saucedemo.mydata import *
 import pytest, os
 
 user_name = os.environ.get('USER_SAUCE')
@@ -16,7 +16,7 @@ def before_all_after_all(playwright):
 
     page = context.new_page()
 
-    login_page = LoginSaucePage(page)
+    login_page = LoginPage(page)
 
     login_page.load()
     login_page.login_form(user_name, user_pass)

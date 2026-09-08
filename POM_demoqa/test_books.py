@@ -1,11 +1,23 @@
 from playwright.sync_api import expect
-from pages.books import BooksPage
-from pages.login import LoginPage
-from mydata import *
-import pytest, os
+from POM_demoqa.pages.books import BooksPage
+from POM_demoqa.pages.login import LoginPage
+from POM_demoqa.mydata import (
+    book_store_header,
+    table_column_one,
+    table_column_two,
+    table_column_three,
+    table_column_four,
+    book_titles,
+    keyword_match_title,
+    keyword_no_match,
+    no_rows_text
+)
+import pytest
+import os
 
 user_name = os.environ.get('USERNAME_QA')
 user_pass = os.environ.get('PASSWORD_QA')
+
 
 @pytest.fixture(scope="session", autouse=True)
 def before_all_after_all(playwright):
@@ -19,7 +31,9 @@ def before_all_after_all(playwright):
     yield page
     page.close()
 
-def test_anonymous_user_can_see_book_store_list_and_login_button(before_all_after_all):
+
+def test_anonymous_user_can_see_book_store_list_and_login_button(
+        before_all_after_all):
     page = before_all_after_all
 
     books_page = BooksPage(page)
@@ -43,7 +57,9 @@ def test_anonymous_user_can_see_book_store_list_and_login_button(before_all_afte
     table_rows = books_page.get_table_rows()
     expect(table_rows).to_have_count(10)
 
-def test_anonymous_user_can_see_all_book_titles_from_book_store_table(before_all_after_all):
+
+def test_anonymous_user_can_see_all_book_titles_from_book_store_table(
+        before_all_after_all):
     page = before_all_after_all
 
     books_page = BooksPage(page)
@@ -55,7 +71,9 @@ def test_anonymous_user_can_see_all_book_titles_from_book_store_table(before_all
     expect(all_book_titles).to_have_count(8)
     expect(all_book_titles).to_have_text(book_titles)
 
-def test_anonymous_user_can_navigate_to_login_page_from_books_page(before_all_after_all):
+
+def test_anonymous_user_can_navigate_to_login_page_from_books_page(
+        before_all_after_all):
     page = before_all_after_all
 
     books_page = BooksPage(page)
@@ -67,7 +85,9 @@ def test_anonymous_user_can_navigate_to_login_page_from_books_page(before_all_af
     books_page.click_login()
     expect(page).to_have_url(books_page.login_URL)
 
-def test_authenticated_user_can_see_book_store_list_username_and_logout_button(before_all_after_all):
+
+def test_authenticated_user_can_see_book_store_list_username_and_logout_button(
+        before_all_after_all):
     page = before_all_after_all
 
     books_page = BooksPage(page)
@@ -104,6 +124,7 @@ def test_authenticated_user_can_see_book_store_list_username_and_logout_button(b
     books_page.click_logout()
     expect(page).to_have_url(books_page.login_URL)
 
+
 def test_anonymous_user_can_search_books_by_title(before_all_after_all):
     page = before_all_after_all
 
@@ -122,7 +143,9 @@ def test_anonymous_user_can_search_books_by_title(before_all_after_all):
     expect(all_book_titles.nth(2)).to_have_text(book_titles[5])
     expect(all_book_titles.nth(3)).to_have_text(book_titles[6])
 
-def test_no_rows_are_displayed_when_keyword_does_not_match_title_author_nor_publisher(before_all_after_all):
+
+def test_no_rows_are_displayed_when_keyword_does_not_match_title_author_nor_publisher(
+        before_all_after_all):
     page = before_all_after_all
 
     books_page = BooksPage(page)

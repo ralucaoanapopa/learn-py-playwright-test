@@ -1,6 +1,7 @@
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
-from pages.base import BasePage
+from POM_saucedemo.pages.base import BasePage
+
 
 class CheckoutPage(BasePage):
 
@@ -22,9 +23,9 @@ class CheckoutPage(BasePage):
     cancel_button_id = "#cancel"
     summary_info_class = ".summary_info_label"
     summary_value_class = ".summary_value_label"
-    summary_subtotal_class= ".summary_subtotal_label"
-    summary_tax_class= ".summary_tax_label"
-    summary_total_class= ".summary_total_label"
+    summary_subtotal_class = ".summary_subtotal_label"
+    summary_tax_class = ".summary_tax_label"
+    summary_total_class = ".summary_total_label"
 
     finish_checkout_button_id = "#finish"
     complete_header_class = ".complete-header"
@@ -74,7 +75,7 @@ class CheckoutPage(BasePage):
 
     def enter_first_name(self, first):
         self.page.locator(self.first_name_id).fill(first)
-    
+
     def enter_last_name(self, last):
         self.page.locator(self.last_name_id).fill(last)
 
@@ -100,7 +101,7 @@ class CheckoutPage(BasePage):
 
     def elements_by_class(self, element):
         return self.page.locator(element)
-    
+
     def click_finish(self):
         self.get_button_finish().click()
 

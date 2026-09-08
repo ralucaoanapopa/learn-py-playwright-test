@@ -10,6 +10,7 @@ page_title = "ToolsQA"
 user_name = os.environ.get('USERNAME_QA')
 user_pass = os.environ.get('PASSWORD_QA')
 
+
 def test_run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False, slow_mo=400)
     context = browser.new_context(

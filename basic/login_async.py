@@ -1,11 +1,12 @@
 import asyncio, os
-from playwright.async_api import Playwright, async_playwright, expect
+from playwright.async_api import Playwright, async_playwright
 
 base_URL = 'https://demoqa.com/'
 login_URL = base_URL+'login'
 
 user_name = os.environ.get('USERNAME_QA')
 user_pass = os.environ.get('PASSWORD_QA')
+
 
 async def test_run(playwright: Playwright) -> None:
     browser = await playwright.chromium.launch(headless=False, slow_mo=2000)

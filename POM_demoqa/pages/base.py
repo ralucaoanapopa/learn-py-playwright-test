@@ -1,4 +1,5 @@
-from mydata import *
+from POM_demoqa.mydata import base_URL_DemoQA
+
 
 class BasePage(object):
     def __init__(self):

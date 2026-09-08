@@ -13,6 +13,7 @@ dropdown_link_class = ".dropdown__link"
 xpath_python_option = 'xpath=//a[@href="/python/"]'
 navbar_item_list_class = ".navbar__item.dropdown.dropdown--hoverable"
 
+
 @pytest.fixture(scope="function", autouse=True)
 def before_each_after_each(page: Page):
     print("beforeEach")
@@ -21,8 +22,10 @@ def before_each_after_each(page: Page):
     yield
     print("afterEach")
 
+
 def test_main_navigation(page: Page):
     expect(page).to_have_url(base_url)
+
 
 def test_navigate_to_get_started_page(page: Page):
     get_started_btn = page.locator(get_started_class)
@@ -31,12 +34,14 @@ def test_navigate_to_get_started_page(page: Page):
     get_started_btn.click()
     expect(page).to_have_url(intro_url)
 
+
 def test_navigate_to_community_page(page: Page):
     community_link = page.get_by_role("link", name="Community")
     expect(community_link).to_have_attribute("href", "/community/welcome")
 
     community_link.click()
     expect(page).to_have_url(community_url)
+
 
 def test_choose_python(page: Page):
     nav_bar_list = page.locator(dropdown_link_class)

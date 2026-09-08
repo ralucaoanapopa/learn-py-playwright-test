@@ -3,6 +3,7 @@ from playwright.sync_api import Page, expect
 
 base_url = "https://playwright.dev/"
 
+
 def test_homepage_has_Playwright_in_title_and_get_started_link_linking_to_the_intro_page(page: Page):
     page.goto(base_url)
 

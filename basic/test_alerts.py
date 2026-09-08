@@ -13,6 +13,7 @@ confirm_message = "Cancel"
 accept_message = "Accept this prompt alert"
 prompt_result_id = '#promptResult'
 
+
 @pytest.fixture(scope="function", autouse=True)
 def before_each_after_each(playwright):
     chromium = playwright.chromium
@@ -26,6 +27,7 @@ def before_each_after_each(playwright):
     yield page
     page.close()
 
+
 def test_accept_simple_alert(before_each_after_each):
     page = before_each_after_each
 
@@ -34,7 +36,8 @@ def test_accept_simple_alert(before_each_after_each):
 
     # launch the simple alert
     page.locator(button_one).click()
-    
+
+
 def test_cancel_alert(before_each_after_each):
     page = before_each_after_each
 
@@ -45,6 +48,7 @@ def test_cancel_alert(before_each_after_each):
 
     expect(page.locator(confirm_result_id)).to_contain_text(confirm_message)
 
+
 def test_handle_prompt_alert(before_each_after_each):
     page = before_each_after_each
 
@@ -53,4 +57,3 @@ def test_handle_prompt_alert(before_each_after_each):
 
     # launch the prompt alert
     expect(page.locator(prompt_result_id)).to_contain_text(accept_message)
-    

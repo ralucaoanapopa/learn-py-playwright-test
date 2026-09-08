@@ -1,7 +1,10 @@
 base_URL_Sauce = "https://www.saucedemo.com/"
 site_title = "Swag Labs"
 invalid_data = "invalid"
-error_msg_invalid_credentials = "Epic sadface: Username and password do not match any user in this service"
+error_msg_invalid_credentials = (
+    "Epic sadface: Username and password do not"
+    " match any user in this service"
+)
 filter_name_asc = "Name (A to Z)"
 filter_name_desc = "Name (Z to A)"
 filter_price_asc = "Price (low to high)"
@@ -36,7 +39,10 @@ total_price = "Total: $103.65"
 finish_checkout = "Finish"
 checkout_final_title = "Checkout: Complete!"
 complete_header = "THANK YOU FOR YOUR ORDER"
-complete_text = "Your order has been dispatched, and will arrive just as fast as the pony can get there!"
+complete_text = (
+    "Your order has been dispatched,"
+    " and will arrive just as fast as the pony can get there!"
+)
 final_img = "/static/media/pony-express.46394a5d.png"
 error_checkout_first_name = "Error: First Name is required"
 error_checkout_last_name = "Error: Last Name is required"
