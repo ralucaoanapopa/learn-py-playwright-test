@@ -30,7 +30,7 @@ class CheckoutPage(BasePage):
     finish_checkout_button_id = "#finish"
     complete_header_class = ".complete-header"
     complete_text_class = ".complete-text"
-    final_image_class = ".pony_express"
+    final_image_class = 'img[data-test="pony-express"]'
     back_button_id = "#back-to-products"
 
     error_validation_class = ".error-message-container.error"

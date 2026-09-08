@@ -34,7 +34,7 @@ from POM_saucedemo.mydata import (
     checkout_final_title,
     complete_header,
     complete_text,
-    final_img,
+    final_img_alt,
     error_checkout_first_name,
     error_checkout_last_name,
     error_checkout_postal_code
@@ -239,8 +239,10 @@ def test_should_be_able_to_finish_order_from_checkout(before_all_after_all):
         checkout_page.complete_header_class)).to_have_text(complete_header)
     expect(checkout_page.elements_by_class(
         checkout_page.complete_text_class)).to_have_text(complete_text)
-    expect(checkout_page.elements_by_class(
-        checkout_page.final_image_class)).to_have_attribute("src", final_img)
+    final_image = checkout_page.elements_by_class(
+        checkout_page.final_image_class)
+    expect(final_image).to_be_visible()
+    expect(final_image).to_have_attribute("alt", final_img_alt)
 
 
 def test_should_be_able_to_navigate_back_to_inventory_after_order_was_sent(
