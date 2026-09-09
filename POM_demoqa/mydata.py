@@ -16,5 +16,5 @@ book_titles = [
     "Understanding ECMAScript 6"]
 keyword_match_title = "Java"
 keyword_no_match = "ZZZZZ"
-no_rows_text = "No rows found"
+no_results_pagination_text = "Page 1 of 0"
 base_URL_DemoQA = "https://demoqa.com/"

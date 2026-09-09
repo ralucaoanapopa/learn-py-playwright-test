@@ -1,9 +1,9 @@
 import pytest
 from playwright.sync_api import expect
 
-base_URL = 'https://demoqa.com/text-box'
+from page_titles import PageTitles
 
-page_title = "ToolsQA"
+base_URL = 'https://demoqa.com/text-box'
 
 label_full_name_id = '#userName-label'
 label_email_id = '#userEmail-label'
@@ -27,6 +27,7 @@ email_output_id = '#email'
 current_address_output_xpath = "xpath=//p[@id='currentAddress']"
 permanent_address_output_xpath = "xpath=//p[@id='permanentAddress']"
 
+
 @pytest.fixture(scope="function", autouse=True)
 def before_each_after_each(playwright):
     chromium = playwright.chromium
@@ -37,10 +38,11 @@ def before_each_after_each(playwright):
     page.goto(base_URL)
 
     expect(page).to_have_url(base_URL)
-    expect(page).to_have_title(page_title)
+    expect(page).to_have_title(PageTitles.DEMOQA)
 
     yield page
     page.close()
+
 
 def test_enter_data_on_text_box_page(before_each_after_each):
     page = before_each_after_each
@@ -49,7 +51,9 @@ def test_enter_data_on_text_box_page(before_each_after_each):
     expect(page.locator(label_full_name_id)).to_have_text('Full Name')
     expect(page.locator(label_email_id)).to_have_text('Email')
     expect(page.locator(label_current_address)).to_have_text('Current Address')
-    expect(page.locator(label_permanent_address)).to_have_text('Permanent Address')
+    expect(page.locator(label_permanent_address)).to_have_text(
+        'Permanent Address'
+        )
 
     # enter data in fields:
     page.locator(full_name_id).fill(full_name_data)
@@ -63,8 +67,11 @@ def test_enter_data_on_text_box_page(before_each_after_each):
 
     expect(page.locator(name_output_id)).to_contain_text(full_name_data)
     expect(page.locator(email_output_id)).to_contain_text(email_data)
-    expect(page.locator(current_address_output_xpath)).to_contain_text(current_address_data)
-    expect(page.locator(permanent_address_output_xpath)).to_contain_text(permanent_address_data)
+    expect(page.locator(current_address_output_xpath)).to_contain_text(
+        current_address_data)
+    expect(page.locator(permanent_address_output_xpath)).to_contain_text(
+        permanent_address_data)
+
 
 def test_enter_data_with_check_for_None(before_each_after_each):
     page = before_each_after_each
@@ -88,8 +95,7 @@ def test_enter_data_with_check_for_None(before_each_after_each):
 
     expect(page.locator(name_output_id)).to_contain_text(full_name_data)
     expect(page.locator(email_output_id)).to_contain_text(email_data)
-    expect(page.locator(current_address_output_xpath)).to_contain_text(current_address_data)
-    expect(page.locator(permanent_address_output_xpath)).to_contain_text(permanent_address_data)
-
-
-    
+    expect(page.locator(current_address_output_xpath)).to_contain_text(
+        current_address_data)
+    expect(page.locator(permanent_address_output_xpath)).to_contain_text(
+        permanent_address_data)

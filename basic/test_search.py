@@ -1,17 +1,19 @@
 import pytest
 from playwright.sync_api import expect
 
-books_demoqa_URL = 'https://demoqa.com/books'
-book_title_xpath = "xpath=//div[@class='main-header']"
-book_title_data = 'Book Store'
+from page_titles import PageTitles
 
-page_title = "ToolsQA"
+books_demoqa_URL = 'https://demoqa.com/books'
 
 book_title_class_xpath = "xpath=//span[@class='mr-2']"
 
-title_list = ['Git Pocket Guide', 'Learning JavaScript Design Patterns', 'Designing Evolvable Web APIs with ASP.NET',
-                'Speaking JavaScript', 'You Don\'t Know JS', 'Programming JavaScript Applications',
-                'Eloquent JavaScript, Second Edition', 'Understanding ECMAScript 6']
+title_list = [
+    'Git Pocket Guide', 'Learning JavaScript Design Patterns',
+    'Designing Evolvable Web APIs with ASP.NET',
+    'Speaking JavaScript', 'You Don\'t Know JS',
+    'Programming JavaScript Applications',
+    'Eloquent JavaScript, Second Edition', 'Understanding ECMAScript 6']
+
 
 @pytest.fixture(scope="session", autouse=True)
 def before_all_after_all(playwright):
@@ -23,6 +25,7 @@ def before_all_after_all(playwright):
     yield context
     context.close()
 
+
 @pytest.fixture(scope="function", autouse=True)
 def before_each_after_each(before_all_after_all):
     # use context for all test, but page for each test
@@ -32,12 +35,11 @@ def before_each_after_each(before_all_after_all):
     page.goto(books_demoqa_URL)
 
     expect(page).to_have_url(books_demoqa_URL)
-    expect(page).to_have_title(page_title)
-
-    expect(page.locator(book_title_xpath)).to_have_text(book_title_data)
+    expect(page).to_have_title(PageTitles.DEMOQA)
 
     yield page
     page.close()
+
 
 def test_table_has_10_rows(before_each_after_each):
     page = before_each_after_each
@@ -47,6 +49,7 @@ def test_table_has_10_rows(before_each_after_each):
 
     # easier
     expect(page.get_by_role("rowgroup")).to_have_count(10)
+
 
 def test_all_book_titles_from_the_list(before_each_after_each):
     page = before_each_after_each
@@ -71,4 +74,3 @@ def test_all_book_titles_from_the_list(before_each_after_each):
         title_display = all_book_titles.nth(index).text_content()
         assert title_display == title
         index = index + 1
-

@@ -1,6 +1,7 @@
 from playwright.sync_api import Page, expect
 
-from pages.base import BasePage
+from POM_saucedemo.pages.base import BasePage
+
 
 class InventoryPage(BasePage):
 
@@ -49,7 +50,7 @@ class InventoryPage(BasePage):
 
     def get_shopping_cart(self):
         return self.page.locator(self.shopping_cart_class)
-    
+
     def get_products_list(self):
         return self.page.locator(self.inventory_list_class)
 
@@ -80,12 +81,12 @@ class InventoryPage(BasePage):
         self.get_select_sort_filter().select_option(value='lohi')
 
     def add_product_to_shopping_cart(self, product_id):
-        product_to_add =  self.page.locator(product_id)
+        product_to_add = self.page.locator(product_id)
         product_to_add.click()
 
     def button_remove_product(self, product_id):
         return self.page.locator(product_id)
-    
+
     def get_shopping_cart_badge(self):
         return self.page.locator(self.shopping_cart_badge_class)
 

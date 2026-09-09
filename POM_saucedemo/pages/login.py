@@ -1,8 +1,9 @@
 from playwright.sync_api import Page
 
-from pages.base import BasePage
+from POM_saucedemo.pages.base import BasePage
 
-class LoginSaucePage(BasePage):
+
+class LoginPage(BasePage):
 
     username_input_id = "#user-name"
     password_input_id = "#password"

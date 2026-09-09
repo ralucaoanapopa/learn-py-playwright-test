@@ -1,14 +1,15 @@
 from playwright.sync_api import Playwright, expect
 import os
 
+from page_titles import PageTitles
+
 base_URL = 'https://demoqa.com/'
 login_URL = base_URL+'login'
 profile_URL = base_URL+'profile'
 
-page_title = "ToolsQA"
-
 user_name = os.environ.get('USERNAME_QA')
 user_pass = os.environ.get('PASSWORD_QA')
+
 
 def test_run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False, slow_mo=400)
@@ -24,9 +25,9 @@ def test_run(playwright: Playwright) -> None:
     page.get_by_placeholder("Password").fill(user_pass)
     page.get_by_role("button", name="Login").click()
 
-    expect(page).to_have_title(page_title)
+    expect(page).to_have_title(PageTitles.DEMOQA)
     expect(page).to_have_url(profile_URL)
-    page.get_by_role("button", name="Log out").click()
+    page.get_by_role("button", name="Logout").click()
     expect(page).to_have_url(login_URL)
 
     context.close()

@@ -1,11 +1,12 @@
-import pytest, os
+import pytest
+import os
 from playwright.sync_api import expect
+
+from page_titles import PageTitles
 
 base_URL = 'https://demoqa.com/'
 login_URL = base_URL+'login'
 profile_URL = base_URL+'profile'
-
-page_title = "ToolsQA"
 
 username_id = '#userName'
 passwd_id = '#password'
@@ -14,6 +15,7 @@ username_value_id = '#userName-value'
 
 user_name = os.environ.get('USERNAME_QA')
 user_pass = os.environ.get('PASSWORD_QA')
+
 
 @pytest.fixture(scope="session", autouse=True)
 def before_all_after_all(playwright):
@@ -26,24 +28,26 @@ def before_all_after_all(playwright):
     page.goto(login_URL)
 
     expect(page).to_have_url(login_URL)
-    expect(page).to_have_title(page_title)
+    expect(page).to_have_title(PageTitles.DEMOQA)
 
     yield page
     page.close()
 
+
 def test_login_with_valid_credentials(before_all_after_all):
     page = before_all_after_all
-    
+
     page.fill(username_id, user_name)
     page.fill(passwd_id, user_pass)
     page.click(login_btn_id)
 
-    expect(page).to_have_title(page_title)
+    expect(page).to_have_title(PageTitles.DEMOQA)
     expect(page).to_have_url(profile_URL)
     expect(page.locator(username_value_id)).to_have_text(user_name)
 
-    page.click("text=Log out")
+    page.click("text=Logout")
     expect(page).to_have_url(login_URL)
+
 
 def test_login_generated_with_codegen(before_all_after_all) -> None:
     page = before_all_after_all
@@ -52,7 +56,7 @@ def test_login_generated_with_codegen(before_all_after_all) -> None:
     page.get_by_placeholder("Password").fill(user_pass)
     page.get_by_role("button", name="Login").click()
 
-    expect(page).to_have_title(page_title)
+    expect(page).to_have_title(PageTitles.DEMOQA)
     expect(page).to_have_url(profile_URL)
-    page.click("text=Log out")
+    page.click("text=Logout")
     expect(page).to_have_url(login_URL)

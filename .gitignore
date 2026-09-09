@@ -2,5 +2,6 @@ basic/__pycache__/*
 */__pycache__/*
 */pages/__pycache__/*
 *.bat
+*.sh
 videos/
 screenshots/

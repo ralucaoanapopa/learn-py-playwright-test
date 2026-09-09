@@ -1,13 +1,14 @@
 from playwright.sync_api import Page
 
-from pages.base import BasePage
+from POM_demoqa.pages.base import BasePage
+
 
 class LoginPage(BasePage):
 
     username_input_id = "input[id='userName']"
     password_input_id = "input[id='password']"
     login_btn_id = "button[id='login']"
-    title = "ToolsQA"
+    title = "demosite"
 
     def __init__(self, page: Page):
         super().__init__()
