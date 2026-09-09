@@ -27,7 +27,7 @@ source .venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-5. Install the required browsers (chromium, firefox, webkit)
+5. Install the required web drivers (chromium, firefox, webkit)
 
 ```
 playwright install
@@ -88,8 +88,9 @@ pytest POM_saucedemo/* --headed
 # Results
 
 ## All tests
-![All tests](/results/all_tests_pytest_playwright.PNG "All tests")
-![Part of tests](/results/part_of_tests_ran.PNG "Part of tests")
+![POM demoqa tests](/results/pom_demoqa.png "POM demoqa tests")
+![POM sauce demo tests](/results/pom_saucedemo.png "POM sauce demo tests")
+![Basic tests](/results/basic_tests.png)
 
 # Resources
 

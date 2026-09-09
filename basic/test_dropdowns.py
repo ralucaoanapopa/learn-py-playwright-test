@@ -1,8 +1,9 @@
 import pytest
 from playwright.sync_api import expect
 
+from page_titles import PageTitles
+
 herokuapp_dropdown_URL = 'https://the-internet.herokuapp.com/dropdown'
-page_title = 'The Internet'
 dropdown_id = '#dropdown'
 option_1_label = "Option 1"
 option_2_value = "2"
@@ -34,7 +35,7 @@ def test_handle_dropdown_herokuapp(before_all_after_all):
     page = before_all_after_all
 
     page.goto(herokuapp_dropdown_URL)
-    expect(page).to_have_title(page_title)
+    expect(page).to_have_title(PageTitles.HEROKU)
 
     dropdown_elem = page.locator(dropdown_id)
     # select option based on value

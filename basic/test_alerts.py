@@ -1,8 +1,9 @@
 import pytest
 from playwright.sync_api import expect
 
+from page_titles import PageTitles
+
 base_URL = 'https://demoqa.com/alerts'
-page_title = "ToolsQA"
 
 button_one = '#alertButton'
 button_three = '#confirmButton'
@@ -23,7 +24,7 @@ def before_each_after_each(playwright):
     page = context.new_page()
     page.goto(base_URL)
     expect(page).to_have_url(base_URL)
-    expect(page).to_have_title(page_title)
+    expect(page).to_have_title(PageTitles.DEMOQA)
     yield page
     page.close()
 

@@ -5,7 +5,7 @@ base_url = "https://playwright.dev/"
 intro_path = "docs/intro"
 intro_url = base_url + intro_path
 get_started_class = ".getStarted_Sjon"
-community_path = "community/welcome"
+community_path = "community/learn-videos"
 community_url = base_url + community_path
 python_path = "python/"
 base_url_py = base_url + python_path
@@ -36,8 +36,9 @@ def test_navigate_to_get_started_page(page: Page):
 
 
 def test_navigate_to_community_page(page: Page):
-    community_link = page.get_by_role("link", name="Community")
-    expect(community_link).to_have_attribute("href", "/community/welcome")
+    # page.goto(base_url+community_path)
+    community_link = page.get_by_role("link", name="Learn Videos")
+    expect(community_link).to_have_attribute("href", "/community/learn-videos")
 
     community_link.click()
     expect(page).to_have_url(community_url)

@@ -1,6 +1,8 @@
 import pytest
 from playwright.sync_api import expect
 
+from page_titles import PageTitles
+
 base_letcode_URL = 'https://letcode.in/'
 frames_letcode_URL = base_letcode_URL + 'frame'
 
@@ -10,12 +12,11 @@ lastName_name = "input[name='lname']"
 firstName_data = 'Hakuna'
 lastName_data = 'Matata'
 lastName_data_parent = 'Gandalf'
-output_xpath = "xpath=//p[@class='title has-text-info']"
+output_xpath = "xpath=//p[@class='text-sm font-semibold text-center']"
 email_name = "input[name='email']"
 email_data = 'hakuna.matata@test.com'
 
 frames_demoqa_URL = 'https://demoqa.com/frames'
-page_title = "ToolsQA"
 frame_content = "This is a sample page"
 
 
@@ -48,13 +49,14 @@ def test_interact_with_nested_frames_on_letcode(before_all_after_all):
             firstName_data + ' ' + lastName_data)
 
         frames = frame.child_frames
-        assert len(frames) is 2
+        assert len(frames) is 5
 
         frames[1].fill(email_name, email_data)
 
         parentFrame = frames[1].parent_frame
         parentFrame.fill(lastName_name, lastName_data_parent)
-        expect(frame.locator(output_xpath)).to_contain_text(firstName_data + ' ' + lastName_data_parent)
+        expect(frame.locator(output_xpath)).to_contain_text(
+            firstName_data + ' ' + lastName_data_parent)
     else:
         raise ("No such frame")
 
@@ -64,7 +66,7 @@ def test_interact_with_frames_on_demoqa(before_all_after_all):
 
     page.goto(frames_demoqa_URL)
     assert page.title() is not None
-    expect(page).to_have_title(page_title)
+    expect(page).to_have_title(PageTitles.DEMOQA)
 
     frame_one = page.frame(url="sample")
     if frame_one is not None:
