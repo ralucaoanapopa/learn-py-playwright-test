@@ -5,17 +5,18 @@ from POM_demoqa.pages.base import BasePage
 
 class BooksPage(BasePage):
 
-    book_header_xpath = "xpath=//div[@class='main-header']"
     login_btn = "button[id='login']"
     logout_btn = "text=Log out"
-    table_head_class = ".rt-thead.-header"
-    table_header_class = ".rt-resizable-header-content"
-    table_body_class = ".rt-tbody"
-    table_body_rows_class = ".rt-tr-group"
+    table_head_selector = "table thead"
+    table_header_selector = "table thead th"
+    table_body_selector = "table tbody"
+    table_body_rows_selector = "table tbody tr"
     book_titles_xpath = "xpath=//span[@class='mr-2']"
     search_input_id = "#searchBox"
-    no_rows_class = ".rt-noData"
     username_value_id = '#userName-value'
+    previous_btn = "button:text-is('Previous')"
+    next_btn = "button:text-is('Next')"
+    pagination_text_xpath = "xpath=//span[contains(text(),'Page ')]"
 
     def __init__(self, page: Page):
         super().__init__()
@@ -34,16 +35,16 @@ class BooksPage(BasePage):
         return self.page.locator(self.logout_btn)
 
     def get_table_head(self):
-        return self.page.locator(self.table_head_class)
+        return self.page.locator(self.table_head_selector)
 
     def get_table_header_columns(self):
-        return self.page.locator(self.table_header_class)
+        return self.page.locator(self.table_header_selector)
 
     def get_table_body(self):
-        return self.page.locator(self.table_body_class)
+        return self.page.locator(self.table_body_selector)
 
     def get_table_rows(self):
-        return self.page.locator(self.table_body_rows_class)
+        return self.page.locator(self.table_body_rows_selector)
 
     def get_all_book_titles(self):
         return self.page.locator(self.book_titles_xpath)
@@ -63,5 +64,11 @@ class BooksPage(BasePage):
     def search_by_keyword(self, keyword):
         self.page.locator(self.search_input_id).fill(keyword)
 
-    def get_no_rows(self):
-        return self.page.locator(self.no_rows_class)
+    def get_previous_btn(self):
+        return self.page.locator(self.previous_btn)
+
+    def get_next_btn(self):
+        return self.page.locator(self.next_btn)
+
+    def get_pagination_text(self):
+        return self.page.locator(self.pagination_text_xpath)

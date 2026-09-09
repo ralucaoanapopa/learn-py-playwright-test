@@ -1,8 +1,8 @@
 from playwright.sync_api import expect
 from POM_demoqa.pages.books import BooksPage
 from POM_demoqa.pages.login import LoginPage
+from POM_demoqa.pages.profile import ProfilePage
 from POM_demoqa.mydata import (
-    book_store_header,
     table_column_one,
     table_column_two,
     table_column_three,
@@ -10,7 +10,7 @@ from POM_demoqa.mydata import (
     book_titles,
     keyword_match_title,
     keyword_no_match,
-    no_rows_text
+    no_results_pagination_text
 )
 import pytest
 import os
@@ -41,7 +41,6 @@ def test_anonymous_user_can_see_book_store_list_and_login_button(
     books_page.load()
     expect(page).to_have_url(books_page.books_URL)
 
-    expect(books_page.get_book_header()).to_have_text(book_store_header)
     expect(books_page.get_login_btn()).to_be_visible()
     expect(books_page.get_table_head()).to_be_visible()
 
@@ -55,7 +54,7 @@ def test_anonymous_user_can_see_book_store_list_and_login_button(
 
     expect(books_page.get_table_body()).to_be_visible()
     table_rows = books_page.get_table_rows()
-    expect(table_rows).to_have_count(10)
+    expect(table_rows).to_have_count(8)
 
 
 def test_anonymous_user_can_see_all_book_titles_from_book_store_table(
@@ -91,6 +90,7 @@ def test_authenticated_user_can_see_book_store_list_username_and_logout_button(
     page = before_all_after_all
 
     books_page = BooksPage(page)
+    profile_page = ProfilePage(page)
 
     books_page.load()
     expect(page).to_have_url(books_page.books_URL)
@@ -102,6 +102,8 @@ def test_authenticated_user_can_see_book_store_list_username_and_logout_button(
     login_page = LoginPage(page)
 
     login_page.login_form(user_name, user_pass)
+    expect(page).to_have_url(books_page.profile_URL)
+    profile_page.go_to_books_page()
     expect(page).to_have_url(books_page.books_URL)
 
     expect(books_page.get_username_value()).to_have_text(user_name)
@@ -144,7 +146,7 @@ def test_anonymous_user_can_search_books_by_title(before_all_after_all):
     expect(all_book_titles.nth(3)).to_have_text(book_titles[6])
 
 
-def test_no_rows_are_displayed_when_keyword_does_not_match_title_author_nor_publisher(
+def test_no_items_are_displayed_when_keyword_does_not_match_title_author_nor_publisher(
         before_all_after_all):
     page = before_all_after_all
 
@@ -153,4 +155,10 @@ def test_no_rows_are_displayed_when_keyword_does_not_match_title_author_nor_publ
     books_page.load()
     expect(books_page.get_search_input()).to_be_visible()
     books_page.search_by_keyword(keyword_no_match)
-    expect(books_page.get_no_rows()).to_have_text(no_rows_text)
+
+    expect(books_page.get_all_book_titles()).to_have_count(0)
+
+    expect(books_page.get_pagination_text()).to_have_text(
+        no_results_pagination_text)
+    expect(books_page.get_previous_btn()).to_be_disabled()
+    expect(books_page.get_next_btn()).to_be_disabled()

@@ -8,7 +8,7 @@ class LoginPage(BasePage):
     username_input_id = "input[id='userName']"
     password_input_id = "input[id='password']"
     login_btn_id = "button[id='login']"
-    title = "ToolsQA"
+    title = "demosite"
 
     def __init__(self, page: Page):
         super().__init__()
